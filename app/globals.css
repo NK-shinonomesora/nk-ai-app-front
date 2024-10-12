@@ -25,3 +25,16 @@ body {
     text-wrap: balance;
   }
 }
+
+/* Ensure button stays inside the textarea */
+.textarea-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+}
+
+.send-btn {
+  position: absolute;
+  bottom: 10px; /* Adjust spacing from bottom */
+  right: 10px;  /* Adjust spacing from right */
+}
