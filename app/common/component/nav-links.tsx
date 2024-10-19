@@ -13,12 +13,8 @@ import clsx from 'clsx';
 // Depending on the size of the application, this would be stored in a database.
 const links = [
   { name: 'Home', href: '/top', icon: HomeIcon },
-  {
-    name: '文書分類',
-    href: '/top/document_classification',
-    icon: DocumentDuplicateIcon,
-  },
-  // { name: 'Customers', href: '/dashboard/customers', icon: UserGroupIcon },
+  { name: '文書分類', href: '/top/document_classification', icon: DocumentDuplicateIcon },
+  { name: '自然言語推論', href: '/top/natural_language_inference', icon: UserGroupIcon },
 ];
 
 export default function NavLinks() {
