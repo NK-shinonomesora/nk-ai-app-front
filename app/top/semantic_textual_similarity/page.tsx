@@ -6,7 +6,7 @@ import MessageTwoInput from "@/app/common/component/message_two_input";
 import ResultTable from "@/app/common/component/result_table";
 import Loading from "@/app/common/component/loading";
 
-const NaturalLanguageInference = () => {
+const SemanticTextualSimilarity = () => {
     const [firstText, setFirstText] = useState<string>("");
     const [secondText, setSecondText] = useState<string>("");
     const [results, setResults] = useState<SentimentanalysisResult[]>([]);
@@ -23,7 +23,7 @@ const NaturalLanguageInference = () => {
     const sendText = async () => {
         setIsLoading(true);
         const response = await axios.post(
-            "http://127.0.0.1:8000/natural_language_inference",
+            "http://127.0.0.1:8000/semantic_textual_similarity",
             { firstText, secondText }
         );
         setIsLoading(false);
@@ -37,7 +37,7 @@ const NaturalLanguageInference = () => {
             { isLoading && <Loading />}
     
             <ResultTable
-                title={"論理関係予測結果"}
+                title={"類似度測定結果"}
                 results={results}
             />
     
@@ -52,4 +52,4 @@ const NaturalLanguageInference = () => {
     )
 }
 
-export default NaturalLanguageInference;
+export default SemanticTextualSimilarity;

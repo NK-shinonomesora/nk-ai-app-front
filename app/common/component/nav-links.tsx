@@ -4,6 +4,7 @@ import {
   UserGroupIcon,
   HomeIcon,
   DocumentDuplicateIcon,
+  QueueListIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -15,6 +16,7 @@ const links = [
   { name: 'Home', href: '/top', icon: HomeIcon },
   { name: '文書分類', href: '/top/document_classification', icon: DocumentDuplicateIcon },
   { name: '自然言語推論', href: '/top/natural_language_inference', icon: UserGroupIcon },
+  { name: '意味的類似度計算', href: '/top/semantic_textual_similarity', icon: QueueListIcon },
 ];
 
 export default function NavLinks() {
