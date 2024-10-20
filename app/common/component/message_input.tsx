@@ -1,19 +1,21 @@
 
 const MessageInput = ({ changeMessage, sendMessage, text }) => {
     return (
-        <div className="flex justify-center mt-4">
-            <div className="textarea-container w-11/12 max-w-lg mb-16">
-                <textarea
-                    className="w-full h-12 p-2 text-lg border-2 border-gray-300 rounded-lg resize-none overflow-hidden"
-                    placeholder="Type here..."
+        <div className="absolute bottom-0 left-0 right-0 text-center p-4">
+            <div className="flex space-x-4 justify-center">
+                <input
+                    type="text"
+                    placeholder="テキストを入力してください。"
+                    className="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 w-8/12"
                     onChange={(e) => changeMessage(e.target.value)}
                     value={text}
-                ></textarea>
-                <button
-                    className="send-btn bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600"
-                    onClick={() => sendMessage()}
                 >
-                Send</button>
+                </input>
+                <button
+                    className="bg-indigo-600 text-white py-2 px-6 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    onClick={() => sendMessage()}
+                >送信
+                </button>
             </div>
         </div>
     )
