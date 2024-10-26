@@ -5,11 +5,14 @@ import axios from "axios";
 import MessageInput from "@/app/common/component/message_input";
 import ResultTable from "@/app/common/component/result_table";
 import Loading from "@/app/common/component/loading";
+import ErrorMessage from "@/app/common/component/error_message";
 
 const DocumentClassification = () => {
     const [text, setText] = useState<string>("");
     const [results, setResults] = useState<SentimentanalysisResult[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [erroeMessage, setErrorMessage] = useState<string>("");
+    const [isError, setIsError] = useState<boolean>(false);
 
     const changeText = (value: string) => {
         setText(value);
@@ -17,15 +20,24 @@ const DocumentClassification = () => {
 
     const sendMessage = async () => {
         setIsLoading(true);
-        const response = await axios.post("http://127.0.0.1:8000/document_classification", { text });
-        setIsLoading(false);
-        setText("");
-        setResults(results.concat(response.data));
+        try {
+            const response = await axios.post("http://127.0.0.1:8000/document_classification", { text });
+            setResults(results.concat(response.data));
+            setIsError(false);
+            setText("");
+        } catch(e) {
+            setIsError(true);
+            setErrorMessage(e.response.data.detail[0]["msg"]);
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     return (
         <div>
             { isLoading && <Loading />}
+
+            { isError && <ErrorMessage message={erroeMessage} />}
 
             <ResultTable
                 title={"感情分析結果"}
