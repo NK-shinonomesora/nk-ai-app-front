@@ -34,7 +34,7 @@ const SemanticTextualSimilarity = () => {
 
     return (
         <div>
-            { isLoading && <Loading />}
+            { isLoading && <Loading text={"予測中..."} />}
     
             <ResultTable
                 title={"類似度測定結果"}
