@@ -11,7 +11,7 @@ const DocumentClassification = () => {
     const [text, setText] = useState<string>("");
     const [results, setResults] = useState<SentimentanalysisResult[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [erroeMessage, setErrorMessage] = useState<string>("");
+    const [errorMessage, setErrorMessage] = useState<string>("");
     const [isError, setIsError] = useState<boolean>(false);
 
     const changeText = (value: string) => {
@@ -35,9 +35,9 @@ const DocumentClassification = () => {
 
     return (
         <div>
-            { isLoading && <Loading />}
+            { isLoading && <Loading text={"予測中..."} />}
 
-            { isError && <ErrorMessage message={erroeMessage} />}
+            { isError && <ErrorMessage message={errorMessage} />}
 
             <ResultTable
                 title={"感情分析結果"}

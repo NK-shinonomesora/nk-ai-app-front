@@ -34,7 +34,7 @@ const NaturalLanguageInference = () => {
 
     return (
         <div>
-            { isLoading && <Loading />}
+            { isLoading && <Loading text={"予測中..."}/>}
     
             <ResultTable
                 title={"論理関係予測結果"}
