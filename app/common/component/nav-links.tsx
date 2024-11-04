@@ -7,6 +7,7 @@ import {
   QueueListIcon,
   BookmarkIcon,
   ListBulletIcon,
+  MagnifyingGlassCircleIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -21,6 +22,7 @@ const links = [
   { name: '意味的類似度計算', href: '/top/semantic_textual_similarity', icon: QueueListIcon },
   { name: 'メモ登録', href: '/top/regist_memo', icon: BookmarkIcon },
   { name: 'メモ一覧', href: '/top/list_memo', icon: ListBulletIcon },
+  { name: 'メモ検索', href: '/top/search_memo', icon: MagnifyingGlassCircleIcon },
 ];
 
 export default function NavLinks() {
