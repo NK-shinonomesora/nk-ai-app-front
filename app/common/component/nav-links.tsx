@@ -16,13 +16,13 @@ import clsx from 'clsx';
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
 const links = [
-  { name: 'Home', href: '/top', icon: HomeIcon },
-  { name: '文書分類', href: '/top/document_classification', icon: DocumentDuplicateIcon },
-  { name: '自然言語推論', href: '/top/natural_language_inference', icon: UserGroupIcon },
-  { name: '意味的類似度計算', href: '/top/semantic_textual_similarity', icon: QueueListIcon },
   { name: 'メモ登録', href: '/top/regist_memo', icon: BookmarkIcon },
   { name: 'メモ一覧', href: '/top/list_memo', icon: ListBulletIcon },
   { name: 'メモ検索', href: '/top/search_memo', icon: MagnifyingGlassCircleIcon },
+  { name: '文書分類', href: '/top/document_classification', icon: DocumentDuplicateIcon },
+  { name: '自然言語推論', href: '/top/natural_language_inference', icon: UserGroupIcon },
+  { name: '意味的類似度計算', href: '/top/semantic_textual_similarity', icon: QueueListIcon },
+  { name: 'テスト', href: '/top', icon: HomeIcon },
 ];
 
 export default function NavLinks() {

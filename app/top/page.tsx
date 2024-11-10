@@ -4,6 +4,11 @@ import { useState } from "react";
 import axios from "axios";
 import MessageInput from "../common/component/message_input";
 import AutoGenerationMessage from "../common/component/auto_generation_message";
+import Link from 'next/link';
+import {
+    EyeIcon,
+    TrashIcon
+  } from '@heroicons/react/24/outline';
 
 const Top = () => {
     const [message, setMessage] = useState<string>("");
@@ -20,9 +25,16 @@ const Top = () => {
 
     return (
         <div>
-            <div className="bg-blue-200 p-4 h-1/6">
-                <p>This is the top div. It is not scrollable.</p>
-            </div>
+            <Link
+                href={{
+                    pathname: '/top/detail_memo',
+                    query: { name: 'test' },
+                }}
+            >
+                <div className="bg-blue-200 p-4 h-1/6">
+                    <p>This is the top div. It is not scrollable.</p>
+                </div>
+            </Link>
 
             <AutoGenerationMessage
                 gptMessage={gptMessage}
@@ -34,6 +46,7 @@ const Top = () => {
                 sendMessage={sendMessage}
             />
         </div>
+
     )
 }
 
