@@ -3,14 +3,15 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Loading from "@/app/common/component/loading";
+import Link from 'next/link';
+import {
+    EyeIcon,
+    TrashIcon
+} from '@heroicons/react/24/outline';
 
 const ListMemo = () => {
     const [memos, setMemos] = useState();
     const [isMounted, setIsMounted] = useState(true); // マウント状態を追跡
-
-    if (memos) {
-        console.log(memos.data)
-    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -31,19 +32,39 @@ const ListMemo = () => {
         <div>
             { !memos && <Loading text={"データ取得中..."}/> }
 
-            <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">メモ一覧</h1>
-
-            <div className="flex flex-wrap justify-center gap-6 p-6 bg-gradient-to-br from-green-200 to-blue-300">
-            {
-                memos &&
-                memos.data.map((memo, i) => (
-                    <div className="memo-card w-64 p-4 bg-white rounded-lg shadow-lg transition transform hover:-translate-y-1 hover:shadow-xl">
-                        <div className="memo-id text-xs text-gray-500 mb-1">#{i + 1}</div>
-                        <h2 className="memo-title text-lg font-semibold text-gray-800 mb-2">{memo.title}</h2>
-                        <p className="memo-content text-gray-600">{memo.content}</p>
-                    </div>
-                ))
-            }
+            <div className="max-w-2xl mx-auto mt-8">
+                <h2 className="text-2xl font-semibold text-gray-700 mb-4">メモ一覧</h2>
+                {
+                    memos &&
+                    memos.data.map((memo, i) => (
+                        <div key={memo.id} className="bg-white shadow-md rounded-lg p-4 mb-4 transition-transform transform hover:-translate-y-1">
+                            <div className="flex justify-between items-center mb-2">
+                                <h3 className="text-xl font-semibold text-gray-800">{memo.title}</h3>
+                                <p className="text-sm text-gray-500">2024-11-09</p>
+                            </div>
+                            <p className="text-gray-600 mb-4">{memo.content}</p>
+                            <div className="flex justify-end space-x-2">
+                                <Link
+                                    href={{
+                                        pathname: '/top/detail_memo',
+                                        query: { memo_id: memo.id },
+                                    }}
+                                >
+                                    <button
+                                        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                                    >
+                                        <EyeIcon className="w-6" />
+                                    </button>
+                                </Link>
+                                    <button
+                                        className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
+                                    >
+                                        <TrashIcon className="w-6" />
+                                    </button>
+                            </div>
+                        </div>
+                    ))
+                }
             </div>
         </div>
     )
