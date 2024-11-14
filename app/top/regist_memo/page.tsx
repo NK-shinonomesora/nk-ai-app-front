@@ -6,6 +6,7 @@ import axios from "axios";
 const RegistMemo = () => {
     const [title, setTitle] = useState<string>("");
     const [content, setContent] = useState<string>("");
+    const [errorMessages, setErrorMessages] = useState();
 
     const changeTitle = (value: string) => {
         setTitle(value);
@@ -16,38 +17,62 @@ const RegistMemo = () => {
     }
 
     const registMemo = async () => {
-        const response = await axios.post(
-            "http://127.0.0.1:8000/memo",
-            { title, content }
-        );
-        console.log(response);
+        try {
+            const response = await axios.post(
+                "http://127.0.0.1:8000/memo",
+                { title, content }
+            );
+            setTitle("");
+            setContent("");
+        } catch(e) {
+            let errorMessages = {};
+            for(let i = 0; i < e.response.data.detail.length; i++) {
+                const label = e.response.data.detail[i].loc[1];
+                errorMessages = {...errorMessages, ...{[label]: e.response.data.detail[i].msg}};
+            }
+            setErrorMessages(errorMessages);
+        }
     }
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-200 to-blue-300">
-            <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
-                <h2 className="text-2xl font-semibold text-gray-800 text-center mb-6">メモ登録</h2>
-                <form>
-                <input 
-                    type="text" 
-                    placeholder="タイトルを入力してください" 
-                    className="w-full px-4 py-2 mb-4 border border-gray-300 rounded focus:outline-none focus:border-blue-400"
-                    onChange={(e) => changeTitle(e.target.value)}
-                ></input>
-                <textarea 
-                    placeholder="内容を入力してください" 
-                    rows="6" 
-                    className="w-full px-4 py-2 mb-4 border border-gray-300 rounded focus:outline-none focus:border-blue-400"
-                    onChange={(e) => changeContent(e.target.value)}
-                ></textarea>
-                <button 
-                    type="submit" 
-                    className="w-full px-4 py-2 text-white bg-green-400 rounded hover:bg-blue-400 transition duration-300"
+        <div className="min-h-screen flex items-center justify-center -mt-12">
+            <div className="bg-white p-10 rounded-lg shadow-lg w-full max-w-2xl">
+                {/* { isError && <ErrorMessage message={errorMessage} />} */}
+                <h1 className="text-3xl font-semibold text-gray-800 mb-8 text-center">メモ登録</h1>
+                <div className="mb-6">
+                    <label className="block text-gray-600 font-medium mb-2 text-lg">タイトル</label>
+                    <input
+                        type="text"
+                        placeholder="タイトルを入力してください"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        onChange={(e) => changeTitle(e.target.value)}
+                        value={title}
+                    >
+                    </input>
+                    <p className="mt-1 text-base text-red-600">
+                        {errorMessages && errorMessages['title']}
+                    </p>
+                </div>
+                <div className="mb-8">
+                    <label className="block text-gray-600 font-medium mb-2 text-lg">内容</label>
+                    <textarea
+                        id="content"
+                        rows="6"
+                        placeholder="メモの内容を入力してください"
+                        className="w-full px-6 py-3 border border-gray-300 rounded-md text-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        onChange={(e) => changeContent(e.target.value)}
+                        value={content}
+                    >
+                    </textarea>
+                    <p className="mt-1 text-base text-red-600">
+                        {errorMessages && errorMessages['content']}
+                    </p>
+                </div>
+                <button
                     onClick={() => registMemo()}
-                >
-                    登録
+                    className="w-full py-3 bg-blue-500 text-white font-semibold text-lg rounded-md hover:bg-blue-600 transition-colors"
+                >登録
                 </button>
-                </form>
             </div>
         </div>
     )
